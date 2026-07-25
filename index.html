@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mening Mini Ilovam</title>
+    <!-- Telegram Web Apps skriptini ulash (Shart!) -->
+    <script src="https://telegram.org"></script>
+    
+    <style>
+        /* Telegram dizayniga moslashuvchi CSS uslublari */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: var(--tg-theme-secondary-bg-color, #f4f4f5);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: var(--tg-theme-button-color, #2481cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Salom, <span id="user-name">Foydalanuvchi</span>! 👋</h1>
+        <p>Mening birinchi Telegram Mini Ilovamga xush kelibsiz.</p>
+        <button id="close-btn">Ilovani yopish</button>
+    </div>
+
+    <script>
+        // Telegram Web App obyektini ishga tushiramiz
+        const tg = window.Telegram.WebApp;
+
+        // Ilova yuklanganda Telegram interfeysini kengaytirish (to'liq ekran qilish)
+        tg.expand();
+
+        // Telegramdan foydalanuvchi ma'lumotlarini olish
+        const user = tg.initDataUnsafe?.user;
+
+        if (user) {
+            // Agar foydalanuvchi ismi bo'lsa, uni ekranga chiqaramiz
+            document.getElementById('user-name').innerText = user.first_name;
+        }
+
+        // Tugma bosilganda ilovani yopish funksiyasi
+        document.getElementById('close-btn').addEventListener('click', () => {
+            tg.close();
+        });
+    </script>
+</body>
+</html>
